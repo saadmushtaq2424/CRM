@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRM | Ridelane</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <section class="sidebar" id="sidebar">
+    <!-- Toggle Button -->
+    <button onclick="toggleSidebar()" class="sidebar-toggle-btn" id="sidebarToggleBtn">
+      <i class="fa fa-caret-square-o-left" aria-hidden="true"></i>
+    </button>
+    <div class="logo text-center p-3">
+      <img
+        src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/uNegKHj8HJXPOe8xGu2Q/media/67204916c8f479b34ab23b49.png"
+        alt="Logo" />
+    </div>
+
+    <div class="menu">
+      <ul class="list-unstyled">
+        <li class="menu-item active" onclick="setActive(this)">
+          <i class="fa fa-filter"></i>
+          <span>All Leads</span>
+        </li>
+
+        <li class="menu-item" onclick="setActive(this)">
+          <i class="fa fa-cog me-2"></i>
+          <span>CRM</span>
+        </li>
+
+        <li class="menu-item dropdown" onclick="toggleRidesDropdown()">
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <span><i class="fa fa-truck me-2"></i> Rides</span>
+            <i class="fa fa-chevron-down"></i>
+          </div>
+        </li>
+        <ul class="rides-dropdown" id="ridesMenu">
+          <li><label class="d-flex justify-content-between"><span>All</span><input type="radio"
+                name="rideStatus" /></label></li>
+          <li><label class="d-flex justify-content-between"><span>Pending</span><input type="radio"
+                name="rideStatus" /></label></li>
+          <li><label class="d-flex justify-content-between"><span>In Progress</span><input type="radio"
+                name="rideStatus" /></label></li>
+          <li><label class="d-flex justify-content-between"><span>Completed</span><input type="radio"
+                name="rideStatus" /></label></li>
+          <li><label class="d-flex justify-content-between"><span>Cancelled</span><input type="radio"
+                name="rideStatus" /></label></li>
+          <li><label class="d-flex justify-content-between"><span>Scheduled</span><input type="radio"
+                name="rideStatus" /></label></li>
+        </ul>
+
+        <div id="menuAfterRides">
+          <li class="menu-item" onclick="setActive(this)">
+            <i class="fa fa-credit-card me-2"></i>
+            <span>Transactions</span>
+          </li>
+          <li class="menu-item" onclick="setActive(this)">
+            <i class="fa fa-database me-2"></i>
+            <span>Data</span>
+          </li>
+          <li class="menu-item" onclick="setActive(this)">
+            <i class="fa fa-map me-2"></i>
+            <span>Vehicle Map</span>
+          </li>
+          <li class="menu-item" onclick="setActive(this)">
+            <i class="fa fa-calculator me-2"></i>
+            <span>Calculator</span>
+          </li>
+        </div>
+      </ul>
+    </div>
+
+    <button class="logoutbtn">
+      <i class="fa fa-sign-out" aria-hidden="true"></i>
+      <span>Logout</span>
+    </button>
+  </section>
+
+  <!-- Main Content -->
+  <section id="interface">
+    <!-- Navigation -->
+    <div class="navigation d-flex justify-content-between align-items-center px-3 py-2 border-bottom bg-white">
+      <div class="search d-flex align-items-center">
+        <i class="fa fa-search me-2"></i>
+        <input type="text" class="form-control form-control-sm" placeholder="Search">
+      </div>
+      <div class="profile d-flex align-items-center gap-3">
+        <i class="fa fa-comments"></i>
+        <i class="fa fa-bell"></i>
+        <img src="images/images 1.jpg" alt="User Avatar" class="rounded-circle profile-img">
+        <div class="dropdown">
+          <a class="btn btn-sm dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            John Nicholes
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Breadcrumb & Add Driver -->
+    <div class="author d-flex justify-content-between align-items-center px-4 py-2">
+      <div class="d-flex align-items-center gap-2">
+        <a href="#" class="text-decoration-none text-primary">Deals /</a>
+        <span class="m-0 fw-semibold">Muhammad Saad</span>
+      </div>
+      <button class="ride-button ">
+        Add Driver
+        <span style="width: 22px; height: 22px; font-size: 14px;">+</span>
+      </button>
+    </div>
+
+    <!-- Deal Info Cards -->
+    <div class="container-fluid px-4 py-3">
+      <div class="d-flex flex-wrap justify-content-between gap-2">
+        <div class="deal-card deal-card-profile d-flex gap-2">
+          <img src="images/images 2.jpg" alt="Profile" class="rounded-circle profile-img" />
+          <div>
+            <span class="deal-name">Muhammad Saad Mushtaq</span>
+            <div class="deal-price">$59.56</div>
+          </div>
+        </div>
+
+        <div class="deal-card deal-card-profile">
+          <div class="deal-label mb-1">Deal Owner</div>
+          <div class="d-flex align-items-start gap-2">
+            <img src="images/images 3.jpg" alt="Owner" class="rounded-circle profile-img" />
+            <div>
+              <div class="deal-status-red">Not Assigned</div>
+            </div>
+          </div>
+          <select class="form-select form-select-sm mt-2">
+            <option>Customer Support</option>
+          </select>
+        </div>
+
+        <div class="deal-card deal-card-profile">
+          <div class="deal-label mb-1">Assigned Driver</div>
+          <div class="d-flex align-items-start gap-2">
+            <img src="images/images 4.jpg" alt="Driver" class="rounded-circle profile-img" />
+            <div class="text-muted-small">No Name</div>
+          </div>
+          <select class="form-select form-select-sm mt-2">
+            <option>Select a Driver</option>
+          </select>
+        </div>
+
+        <div class="deal-card align-items-start justify-content-center">
+          <div>
+            <span class="inline-label">Lead Stage:</span>
+            <span class="fw-semibold">7</span>
+          </div>
+          <div class="w-100 my-1" style="border-top: 1px solid #ccc;"></div>
+          <div>
+            <span class="inline-label">Lead Status:</span>
+            <span class="text-muted-small">No Response</span>
+          </div>
+          <select class="form-select form-select-sm mt-2">
+            <option>Select a Lead Status</option>
+          </select>
+        </div>
+
+        <div class="deal-card text-start justify-content-center">
+          <div class="last-card-text">
+            <strong class="deal-label">Created:</strong> July 15, 2025 - 1:39 PM
+          </div>
+          <div class="w-100 my-1" style="border-top: 1px solid #ccc;"></div>
+          <div class="last-card-text mt-1">
+            <strong class="deal-label">Forecasted Close:</strong> July 18, 2025 - 10:00 PM
+          </div>
+          <div class="w-100 my-1" style="border-top: 1px solid #ccc;"></div>
+          <div class="last-card-text mt-1">
+            <strong class="deal-label">Updated:</strong> July 19, 2025 - 9:30 PM
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Sections -->
+    <section class="main-sections">
+      <div class="container-fluid">
+        <div class="row g-4">
+          <!-- Ride Details (Left Column) -->
+          <div class="col-lg-7">
+            <div class="ride-details">
+              <div class="form-header">
+                <h4>Ride Details (Deal Booked)</h4>
+              </div>
+              <hr />
+
+              <div class="dual-field-row">
+                <div>
+                  <label>Name</label>
+                  <input type="text" value="Saad Qureshi" />
+                </div>
+                <div>
+                  <label>Phone Number</label>
+                  <input type="text" value="+92 3127 6571948" />
+                </div>
+              </div>
+
+              <div class="dual-field-row">
+                <div>
+                  <label>Email</label>
+                  <input type="email" value="saadqureshi@gmail.com" />
+                </div>
+                <div>
+                  <label>Additional Details</label>
+                  <input type="text" value="Orlando Airport" />
+                </div>
+              </div>
+
+              <div class="single-field">
+                <label>Additional Notes for Driver</label>
+                <textarea>TPA, George Bean...</textarea>
+              </div>
+
+              <div class="triple-field-row">
+                <div>
+                  <label>Pickup Location</label>
+                  <input type="text" />
+                </div>
+                <div>
+                  <label>Dropoff Location</label>
+                  <input type="text" />
+                </div>
+                <div>
+                  <label>Passengers</label>
+                  <select>
+                    <option disabled selected>Select</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4+</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="quad-field-row">
+                <div>
+                  <label>Ride Type:</label>
+                  <select>
+                    <option disabled selected>Select</option>
+                    <option>Standard</option>
+                    <option>Luxury</option>
+                    <option>Van</option>
+                    <option>SUV</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Pickup Date</label>
+                  <input type="date" />
+                </div>
+                <div>
+                  <label>Pickup Time</label>
+                  <input type="time" />
+                </div>
+                <div>
+                  <label>Duration(hours)</label>
+                  <select>
+                    <option disabled selected>Select Duration</option>
+                    <option>15 mins</option>
+                    <option>30 mins</option>
+                    <option>45 mins</option>
+                    <option>1 hour</option>
+                    <option>2 hours</option>
+                    <option>3+ hours</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="triple-field-row">
+                <div>
+                  <label>Distance(miles)</label>
+                  <input type="text" />
+                </div>
+                <div>
+                  <label>Price</label>
+                  <input type="text" />
+                </div>
+                <div>
+                  <label>Select Card</label>
+                  <div class="card-row d-flex align-items-center gap-2">
+                    <select class="flex-grow-1">
+                      <option>Visa - **** 4242</option>
+                      <option>Mastercard - **** 1111</option>
+                      <option>New Card</option>
+                    </select>
+                    <button class="ride-button add-btn">
+                      Add Card <span class="sign">+</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-footer d-flex justify-content-between mt-3">
+                <div class="left-actions d-flex gap-2">
+                  <button class="ride-button save-btn">Save</button>
+                  <button class="ride-button quote-btn">Send Quote</button>
+                </div>
+                <div class="right-actions d-flex gap-2">
+                  <button class="ride-button customer-btn">Customer Changes</button>
+                  <button class="ride-button booking-btn">Creating Booking</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notes + Map (Right Column) -->
+          <div class="col-lg-5">
+            <div class="notes-section card p-3 mb-4">
+              <!-- Tab Navigation -->
+              <ul class="nav nav-tabs notes-tabs mb-3" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="notes-tab" data-bs-toggle="tab" href="#notes-content"
+                    role="tab">Notes</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="todo-tab" data-bs-toggle="tab" href="#todo-content" role="tab">Todo</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="text-tab" data-bs-toggle="tab" href="#text-content" role="tab">Text</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="email-tab" data-bs-toggle="tab" href="#email-content" role="tab">Email</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="calls-tab" data-bs-toggle="tab" href="#calls-content" role="tab">Calls</a>
+                </li>
+              </ul>
+
+              <!-- Tab Content -->
+              <div class="tab-content">
+                <!-- Notes -->
+                <div class="tab-pane fade show active" id="notes-content" role="tabpanel">
+                  <div class="notes-content mb-3">
+                    <p><strong>Claudia</strong>: Meeting notes... <span class="text-muted float-end">48 mins ago</span>
+                    </p>
+                  </div>
+                  <div class="d-flex">
+                    <input type="text" class="form-control me-2" placeholder="Type note..." />
+                    <button class="custom-note-btn">Add Note</button>
+                  </div>
+                </div>
+
+                <!-- Todo -->
+                <div class="tab-pane fade" id="todo-content" role="tabpanel">
+                  <div class="notes-content mb-3">
+                    <p><strong>Task</strong>: Follow up with client <span class="text-muted float-end">Today</span></p>
+                  </div>
+                  <div class="d-flex">
+                    <input type="text" class="form-control me-2" placeholder="Add new task..." />
+                    <button class="custom-note-btn">Add Todo</button>
+                  </div>
+                </div>
+
+                <!-- Text -->
+                <div class="tab-pane fade" id="text-content" role="tabpanel">
+                  <div class="notes-content mb-3">
+                    <p><strong>Alex</strong>: Sent a quick text <span class="text-muted float-end">2 hours ago</span>
+                    </p>
+                  </div>
+                  <div class="d-flex">
+                    <input type="text" class="form-control me-2" placeholder="Type message..." />
+                    <button class="custom-note-btn">Send Text</button>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="tab-pane fade" id="email-content" role="tabpanel">
+                  <div class="notes-content mb-3">
+                    <p><strong>Me</strong>: Sent an email to client@example.com <span
+                        class="text-muted float-end">Yesterday</span></p>
+                  </div>
+                  <div class="d-flex">
+                    <input type="text" class="form-control me-2" placeholder="Write email note..." />
+                    <button class="custom-note-btn">Add Email</button>
+                  </div>
+                </div>
+
+                <!-- Calls -->
+                <div class="tab-pane fade" id="calls-content" role="tabpanel">
+                  <div class="notes-content mb-3">
+                    <p><strong>Call with Sarah</strong>: Discussed pricing <span class="text-muted float-end">3 days
+                        ago</span></p>
+                  </div>
+                  <div class="d-flex">
+                    <input type="text" class="form-control me-2" placeholder="Call summary..." />
+                    <button class="custom-note-btn">Log Call</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="form-header">
+              <h4>Map</h4>
+            </div>
+            <div class="map-section card p-2">
+              <iframe
+                src="https://maps.google.com/maps?q=Tampa%20International%20Airport&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy">
+              </iframe>
+            </div>
+          </div>
+
+          <!-- History Section -->
+          <div class="card mt-4 shadow-sm">
+            <div class="card-header bg-black text-white">
+              History
+            </div>
+            <div class="card-body history-body p-0">
+              <ul class="list-group list-group-flush">
+                <!-- Month Header -->
+                <li class="list-group-item bg-light fw-bold text-secondary small">
+                  June 2025
+                </li>
+
+                <!-- History Item 1 -->
+                <li class="list-group-item">
+                  <div class="d-flex justify-content-between">
+                    <span>This ride was archived.</span>
+                    <small class="text-muted">03-Jun-2025 2:03 PM</small>
+                  </div>
+                </li>
+
+                <!-- History Item 2 with email -->
+                <li class="list-group-item">
+                  <div class="d-flex justify-content-between">
+                    <span>
+                      Grace outfit sent a shipping confirmation from email to
+                      <a href="mailto:claudia@gmail.com">claudia@gmail.com</a>
+                      <span class="badge bg-success ms-2">View Email</span>
+                    </span>
+                    <small class="text-muted">01-Jun-2025 4:10 PM</small>
+                  </div>
+                </li>
+
+                <!-- History Item 3 -->
+                <li class="list-group-item">
+                  <div class="d-flex justify-content-between">
+                    <span>Claudia update passenger information.</span>
+                    <small class="text-muted">01-Jun-2025 4:09 PM</small>
+                  </div>
+                </li>
+
+                <!-- Month Header -->
+                <li class="list-group-item bg-light fw-bold text-secondary small">
+                  May 2025
+                </li>
+
+                <!-- History Items for May -->
+                <li class="list-group-item">
+                  <div class="d-flex justify-content-between">
+                    <span>Ride updated to Olivia by Claudia.</span>
+                    <small class="text-muted">29-May-2025 5:35 PM</small>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="d-flex justify-content-between">
+                    <span>Claudia update ride information.</span>
+                    <small class="text-muted">29-May-2025 4:30 PM</small>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="d-flex justify-content-between">
+                    <span>Claudia update passenger information.</span>
+                    <small class="text-muted">29-May-2025 4:28 PM</small>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </section>
+
+  <script src="index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
